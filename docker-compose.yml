@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=lappis
+      - MONGO_INITDB_ROOT_PASSWORD=lappis
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+  app:
+    build: .
+    container_name: myapp
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb://lappis:lappis@mongodb:27017/mydb
+    depends_on:
+      - mongodb
+volumes:
+  mongodb_data:
