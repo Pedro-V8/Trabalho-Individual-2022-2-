@@ -15,7 +15,7 @@ services:
   mongo-import:
     container_name: mongo-import
     image: mongo:4.4.3-bionic
-    command: mongoimport -u lappis -p lappis --host mongodb --db appDB --collection dados --type csv --file data/data/data_example.csv --headerline
+    command: mongoimport -u lappis -p lappis --host mongodb --db dataDB --collection dataC --type csv --file data/data/dados.csv
     depends_on:
       - mongodb
     volumes:
@@ -26,7 +26,6 @@ services:
     image: metabase/metabase:latest
     ports:
       - 3000:3000
-
   app:
     build: .
     container_name: myapp
