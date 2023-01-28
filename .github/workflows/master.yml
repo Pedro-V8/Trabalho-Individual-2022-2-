@@ -1,7 +1,9 @@
+name: Publish to PyPI
+
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -14,13 +16,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.9
 
     - name: Install dependencies
       run: |
         pip install poetry
-        poetry lock
-        poetry install
 
     - name: Build and Publish to PyPI
       run: |
