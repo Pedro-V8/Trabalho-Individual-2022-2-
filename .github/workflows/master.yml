@@ -1,39 +1,27 @@
-name: Trabalho Individual GCES Pedro Vieira
-
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checagem
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Python
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
 
-    - name: Dependencias
+    - name: Install dependencies
       run: |
-        python -m venv .env
-        source .env/bin/activate
-        pip install -r requirements.txt
         pip install poetry
-    - name: Build Docker
-      working-directory: .
-      run: docker-compose build
-    - name: Start Docker
-      run: docker-compose up -d
-    - name: Testes
-      run: docker-compose run app poetry run pytest
-    - name: Finalizando Container
-      run: docker-compose down
-    - name: Build and publish
+        poetry install
+
+    - name: Build and Publish to PyPI
       run: |
         poetry build
-        poetry publish --username PedroV8 --password ${{ secrets.pyPIsecret }}
+        poetry publish --username=PedroV8 --password=${{ secrets.pyPIsecret }}

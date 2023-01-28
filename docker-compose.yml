@@ -27,7 +27,9 @@ services:
     ports:
       - 3000:3000
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: myapp
     ports:
       - "3001:3001"
