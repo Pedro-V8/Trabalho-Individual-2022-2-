@@ -19,6 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install poetry
+        poetry lock
         poetry install
 
     - name: Build and Publish to PyPI
