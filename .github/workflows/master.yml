@@ -26,7 +26,7 @@ jobs:
         pip install poetry
     - name: Build Docker
       working-directory: .
-      run: docker-compose build app
+      run: docker-compose build
     - name: Start Docker
       run: docker-compose up -d
     - name: Testes
